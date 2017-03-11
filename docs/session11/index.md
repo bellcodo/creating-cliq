@@ -1,6 +1,8 @@
 # Session 11
 > Snake tail on the grid
 
+[Last Sessions Code](https://raw.githubusercontent.com/bellcodo/creating-cliq/a43094176fdf92e505e486bade3a2c1cc3854297/src/session11/splix.io)
+
 ## Outline
 1. Construct a square object which can draw itself.
 	1. Create `Square` stub.
