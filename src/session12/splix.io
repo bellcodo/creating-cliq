@@ -104,7 +104,7 @@ class Character:
     class Body:
 
         def __init__(self, shape_attributes):
-            self.body_segments = []
+            self.body_segments = [Square(3,3)]
             self.shape_attributes = shape_attributes
 
         def append(self, segment):
@@ -114,7 +114,8 @@ class Character:
             return list(self.body_segments)
         
         def draw_me(self, canvas):
-            pass
+            for sqr in self.body_segments:
+                sqr.draw_me(canvas)
     
     key_map = {
         "left": 37,
