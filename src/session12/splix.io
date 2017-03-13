@@ -148,6 +148,9 @@ class Character:
     def update_direction(self, shift_point):
         sqr_shift_point = map(lambda pt: pt*IN_SQUARES, shift_point)
         pt = self.circle_shape.center_point
+        sqr_pt = pt[0] - GLOBAL_CIRCLE_RADIUS, pt[1] - GLOBAL_CIRCLE_RADIUS
+        sqr_pt = sqr_pt[0]/IN_SQUARES, sqr_pt[1]/IN_SQUARES
+        self.body.append(Square(sqr_pt))
         new_point = (
             pt[0] + sqr_shift_point[0], 
             pt[1] + sqr_shift_point[1], 
