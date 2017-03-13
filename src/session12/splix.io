@@ -36,6 +36,7 @@ def rect_coords (length, height, startpos = (0, 0)) :
     ]
 
 class Square:
+    
     SHAPE_ATTRIBUTES = DEFAULT_SQUARE_DRAW_ATTRIBUTES
     SIZE = GLOBAL_DEFAULT_SQUARE_SIZE
     
@@ -49,7 +50,9 @@ class Square:
         (x,y) = self.top_left_point
         (x,y) = x*size, y*size
         canvas.draw_polygon(rect_coords(size, size, (x,y)),
-                    self.shape_attributes["line_width"], self.shape_attributes["line_color"], self.shape_attributes["fill_color"]
+            self.shape_attributes["line_width"],
+            self.shape_attributes["line_color"],
+            self.shape_attributes["fill_color"]
         )
                             
 class SquareGrid:
@@ -58,16 +61,14 @@ class SquareGrid:
     NUM_ROWS = GLOBAL_NUM_ROWS
     NUM_COLS = GLOBAL_NUM_COLS
     
-    def __init__(self):
-        self.grid_elements = self.init_grid()
+    def __init__(self, rows=NUM_ROWS, cols=NUM_COLS):
+        self.grid_elements = self.init_grid(rows, cols)
 
-    def init_grid(self):
-        num_rows = self.NUM_ROWS
-        num_cols = self.NUM_COLS
+    def init_grid(self, rows, cols):
         grid_elements = []
         size = self.SQUARE_PIXEL_SIZE
-        for x in range(num_rows):
-            for y in range(num_cols):
+        for x in range(rows):
+            for y in range(cols):
                 top_left_pt = [
                     (x+BASE_SHIFT_X), (y+BASE_SHIFT_Y)
                 ]
@@ -81,6 +82,7 @@ class SquareGrid:
 class Character:
     
     class Circle:
+        
         RADIUS = GLOBAL_CIRCLE_RADIUS
         SHAPE_ATTRIBUTES = DEFUALT_SNAKE_DRAW_ATTRIBUTES
 
