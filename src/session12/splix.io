@@ -12,6 +12,12 @@ GLOBAL_SQUARES_ACROSS = WINDOW_WIDTH / GLOBAL_DEFAULT_SQUARE_SIZE
 BASE_SHIFT_X = (GLOBAL_SQUARES_ACROSS - GLOBAL_NUM_ROWS) /2
 BASE_SHIFT_Y = BASE_SHIFT_X
 
+DEFAULT_SQUARE_DRAW_ATTRIBUTES = {
+    "line_width": 1,
+    "line_color": 'Green',
+    "fill_color": 'Orange'
+}
+
 def rect_coords (length, height, startpos = (0, 0)) :
     x = startpos[0]
     y = startpos[1]
@@ -23,16 +29,17 @@ def rect_coords (length, height, startpos = (0, 0)) :
     ]
 
 class Square:
-    def __init__(self, x, y, size=GLOBAL_DEFAULT_SQUARE_SIZE):
+    def __init__(self, x, y, shape_attributes=DEFAULT_SQUARE_DRAW_ATTRIBUTES, size=GLOBAL_DEFAULT_SQUARE_SIZE):
         self.x = x
         self.y = y
+        self.shape_attributes = shape_attributes
         self.size = size
         
     def draw_me(self, canvas):
         size = self.size
         (x,y) = self.x*size, self.y*size
         canvas.draw_polygon(rect_coords(size, size, (x,y)),
-                    1, 'Green', 'Orange'
+                    self.shape_attributes["line_width"], self.shape_attributes["line_color"], self.shape_attributes["fill_color"]
         )
                             
 class SquareGrid:
