@@ -56,12 +56,9 @@ class SquareGrid:
     NUM_COLS = GLOBAL_NUM_COLS
     
     def __init__(self):
-        self.grid_elements = self.init_grid(
-            WINDOW_WIDTH,
-            WINDOW_HEIGHT
-        )
+        self.grid_elements = self.init_grid()
 
-    def init_grid(self, width, height):
+    def init_grid(self):
         num_rows = self.NUM_ROWS
         num_cols = self.NUM_COLS
         grid_elements = []
