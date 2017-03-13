@@ -158,9 +158,6 @@ class Character:
         self.update_direction((0,1))
     
     def move (self, key):
-
-        #check if key is in key_map array. 
-        #Character: this class name
         if key in Character.key_map.values():
             if key == Character.key_map["right"]:
                 self.move_right()
