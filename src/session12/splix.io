@@ -61,15 +61,6 @@ class SquareGrid:
         for pos in self.grid_elements:
             pos.draw_me(canvas)
 
-
-class ShapeAttributes:
-    def __init__ (self):
-        self.line_width = 2
-        self.line_color = "Aqua"
-        self.fill_color = "Pink"
-
-        # For color: http://www.codeskulptor.org/docs.html#Colors
-
 class Character:
     
     class Circle:
@@ -78,7 +69,8 @@ class Character:
         START_POINT_Y = IN_SQUARES*(BASE_SHIFT_Y + .5)
         RADIUS = GLOBAL_CIRCLE_RADIUS
 
-        def __init__ (self):
+        def __init__(self, shape_attributes):
+            self.shape_attributes = shape_attributes
             start_in_middle_of_base = (GLOBAL_NUM_COLS / 2) - 1
             x = self.START_POINT_X + start_in_middle_of_base*IN_SQUARES
             y = self.START_POINT_Y
@@ -86,17 +78,38 @@ class Character:
             self.radius = self.RADIUS
             self.center_point = (x,y)
             
+        def draw_me(self, canvas):
+            canvas.draw_circle(
+                    self.center_point,
+                    self.radius,
+                    self.shape_attributes.line_width,
+                    self.shape_attributes.fill_color,
+                    self.shape_attributes.fill_color    
+                )
+            
     class Body:
 
-        def __init__(self):
+        def __init__(self, shape_attributes):
             self.body_segments = []
+            self.shape_attributes = shape_attributes
 
         def append(self, segment):
             self.body_segments.append(segment)
 
         def list_segments(self):
             return list(self.body_segments)
-            
+        
+        def draw_me(self, canvas):
+            pass
+    
+    class ShapeAttributes:
+        def __init__ (self):
+            self.line_width = 2
+            self.line_color = "Aqua"
+            self.fill_color = "Pink"
+
+            # For color: http://www.codeskulptor.org/docs.html#Colors
+    
     key_map = {
         "left": 37,
         "up"  : 38,
@@ -108,21 +121,13 @@ class Character:
     vel = [move_dist, 0]
 
     def __init__ (self):
-        self.circle_shape = self.Circle()
-        self.shape_attributes = ShapeAttributes()
-        self.body = self.Body()
+        self.shape_attributes = self.ShapeAttributes()        
+        self.circle_shape = self.Circle(self.shape_attributes)
+        self.body = self.Body(self.shape_attributes)
 
     def draw_me(self, canvas):
-        self.draw_circle(canvas, self.circle_shape.center_point)
-    
-    def draw_circle(self, canvas, center):
-        canvas.draw_circle(
-                center,
-                self.circle_shape.radius,
-                self.shape_attributes.line_width,
-                self.shape_attributes.fill_color,
-                self.shape_attributes.fill_color    
-            )
+        self.circle_shape.draw_me(canvas)
+        self.body.draw_me(canvas)
    
     def update_direction(self, shift_point):
         sqr_shift_point = map(lambda pt: pt*IN_SQUARES, shift_point)
