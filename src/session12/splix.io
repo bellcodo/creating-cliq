@@ -70,35 +70,6 @@ class ShapeAttributes:
 
         # For color: http://www.codeskulptor.org/docs.html#Colors
 
-
-class Circle:
-    
-    START_POINT_X = IN_SQUARES*(BASE_SHIFT_X + .5)
-    START_POINT_Y = IN_SQUARES*(BASE_SHIFT_Y + .5)
-    RADIUS = GLOBAL_CIRCLE_RADIUS
-    
-    def __init__ (self):
-        start_in_middle_of_base = (GLOBAL_NUM_COLS / 2) - 1
-        x = self.START_POINT_X + start_in_middle_of_base*IN_SQUARES
-        y = self.START_POINT_Y
-        
-        self.radius = self.RADIUS
-        self.center_point = (x,y)
-
-    '''
-    def update_x (self, shift_x):
-        self.center_point = (
-            self.center_point[0] + shift_x,
-            self.center_point[1]
-        )
-
-    def update_y (self, shift_y):
-        self.center_point = (
-            self.center_point[0],
-            self.center_point[1] + shift_y
-        )
-    '''
-
 class Body:
 
     def __init__(self):
@@ -111,6 +82,21 @@ class Body:
         return list(self.body_segments)
 
 class Character:
+    
+    class Circle:
+
+        START_POINT_X = IN_SQUARES*(BASE_SHIFT_X + .5)
+        START_POINT_Y = IN_SQUARES*(BASE_SHIFT_Y + .5)
+        RADIUS = GLOBAL_CIRCLE_RADIUS
+
+        def __init__ (self):
+            start_in_middle_of_base = (GLOBAL_NUM_COLS / 2) - 1
+            x = self.START_POINT_X + start_in_middle_of_base*IN_SQUARES
+            y = self.START_POINT_Y
+
+            self.radius = self.RADIUS
+            self.center_point = (x,y)  
+            
     key_map = {
         "left": 37,
         "up"  : 38,
@@ -122,7 +108,7 @@ class Character:
     vel = [move_dist, 0]
 
     def __init__ (self):
-        self.circle_shape = Circle()
+        self.circle_shape = self.Circle()
         self.shape_attributes = ShapeAttributes()
         self.body = Body()
 
