@@ -82,9 +82,9 @@ class Character:
             canvas.draw_circle(
                     self.center_point,
                     self.radius,
-                    self.shape_attributes.line_width,
-                    self.shape_attributes.fill_color,
-                    self.shape_attributes.fill_color    
+                    self.shape_attributes["line_width"],
+                    self.shape_attributes["fill_color"],
+                    self.shape_attributes["fill_color"]   
                 )
             
     class Body:
@@ -102,14 +102,6 @@ class Character:
         def draw_me(self, canvas):
             pass
     
-    class ShapeAttributes:
-        def __init__ (self):
-            self.line_width = 2
-            self.line_color = "Aqua"
-            self.fill_color = "Pink"
-
-            # For color: http://www.codeskulptor.org/docs.html#Colors
-    
     key_map = {
         "left": 37,
         "up"  : 38,
@@ -120,10 +112,10 @@ class Character:
     move_dist = 5
     vel = [move_dist, 0]
 
-    def __init__ (self):
-        self.shape_attributes = self.ShapeAttributes()        
-        self.circle_shape = self.Circle(self.shape_attributes)
-        self.body = self.Body(self.shape_attributes)
+    def __init__ (self, shape_attributes):
+        self.shape_attributes = shape_attributes      
+        self.circle_shape = self.Circle(shape_attributes)
+        self.body = self.Body(shape_attributes)
 
     def draw_me(self, canvas):
         self.circle_shape.draw_me(canvas)
@@ -132,7 +124,6 @@ class Character:
     def update_direction(self, shift_point):
         sqr_shift_point = map(lambda pt: pt*IN_SQUARES, shift_point)
         pt = self.circle_shape.center_point
-        # new_point = reduce(lambda x,y: (x[0]+y[0],x[1]+y[1]), [pt, sqr_shift_point])
         new_point = (
             pt[0] + sqr_shift_point[0], 
             pt[1] + sqr_shift_point[1], 
@@ -172,7 +163,14 @@ class Character:
             if key == Character.key_map["down"]:
                 self.move_down()
 
-snake = Character()            
+# For color: http://www.codeskulptor.org/docs.html#Colors
+snake_draw_attributes = {
+    "line_width": 2,
+    "line_color": "Aqua",
+    "fill_color": "Pink"
+}
+                
+snake = Character(snake_draw_attributes)            
 grid = SquareGrid()                
 
 
