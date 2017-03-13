@@ -86,9 +86,9 @@ class Character:
         RADIUS = GLOBAL_CIRCLE_RADIUS
         SHAPE_ATTRIBUTES = DEFUALT_SNAKE_DRAW_ATTRIBUTES
 
-        def __init__(self, x, y, radius=RADIUS, shape_attributes=SHAPE_ATTRIBUTES):
+        def __init__(self, center, radius=RADIUS, shape_attributes=SHAPE_ATTRIBUTES):
             self.radius = radius
-            self.center_point = (x,y)
+            self.center_point = center
             self.shape_attributes = shape_attributes
             
         def draw_me(self, canvas):
@@ -139,7 +139,7 @@ class Character:
         x = START_POINT_X + start_in_middle_of_base*IN_SQUARES
         y = START_POINT_Y
         
-        return self.Circle(x,y)
+        return self.Circle((x,y))
         
     def draw_me(self, canvas):
         self.circle_shape.draw_me(canvas)
