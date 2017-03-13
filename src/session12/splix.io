@@ -39,15 +39,15 @@ class Square:
     SHAPE_ATTRIBUTES = DEFAULT_SQUARE_DRAW_ATTRIBUTES
     SIZE = GLOBAL_DEFAULT_SQUARE_SIZE
     
-    def __init__(self, x, y, size=SIZE, shape_attributes=SHAPE_ATTRIBUTES):
-        self.x = x
-        self.y = y
+    def __init__(self, top_left_pt, size=SIZE, shape_attributes=SHAPE_ATTRIBUTES):
+        self.top_left_point = top_left_pt
         self.shape_attributes = shape_attributes
         self.size = size
         
     def draw_me(self, canvas):
         size = self.size
-        (x,y) = self.x*size, self.y*size
+        (x,y) = self.top_left_point
+        (x,y) = x*size, y*size
         canvas.draw_polygon(rect_coords(size, size, (x,y)),
                     self.shape_attributes["line_width"], self.shape_attributes["line_color"], self.shape_attributes["fill_color"]
         )
@@ -68,7 +68,10 @@ class SquareGrid:
         size = self.SQUARE_PIXEL_SIZE
         for x in range(num_rows):
             for y in range(num_cols):
-                grid_elements.append(Square((x+BASE_SHIFT_X),(y+BASE_SHIFT_Y)))
+                top_left_pt = [
+                    (x+BASE_SHIFT_X), (y+BASE_SHIFT_Y)
+                ]
+                grid_elements.append(Square(top_left_pt))
         return grid_elements
 
     def draw_me(self, canvas):
@@ -98,7 +101,7 @@ class Character:
     class Body:
 
         def __init__(self, shape_attributes):
-            self.body_segments = [Square(3,3)]
+            self.body_segments = [Square([3,3])]
             self.shape_attributes = shape_attributes
 
         def append(self, segment):
