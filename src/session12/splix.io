@@ -78,19 +78,13 @@ class SquareGrid:
 class Character:
     
     class Circle:
-
-        START_POINT_X = IN_SQUARES*(BASE_SHIFT_X + .5)
-        START_POINT_Y = IN_SQUARES*(BASE_SHIFT_Y + .5)
         RADIUS = GLOBAL_CIRCLE_RADIUS
+        SHAPE_ATTRIBUTES = DEFUALT_SNAKE_DRAW_ATTRIBUTES
 
-        def __init__(self, shape_attributes):
-            self.shape_attributes = shape_attributes
-            start_in_middle_of_base = (GLOBAL_NUM_COLS / 2) - 1
-            x = self.START_POINT_X + start_in_middle_of_base*IN_SQUARES
-            y = self.START_POINT_Y
-
-            self.radius = self.RADIUS
+        def __init__(self, x, y, radius=RADIUS, shape_attributes=SHAPE_ATTRIBUTES):
+            self.radius = radius
             self.center_point = (x,y)
+            self.shape_attributes = shape_attributes
             
         def draw_me(self, canvas):
             canvas.draw_circle(
@@ -129,9 +123,19 @@ class Character:
 
     def __init__ (self, shape_attributes):
         self.shape_attributes = shape_attributes      
-        self.circle_shape = self.Circle(shape_attributes)
+        self.circle_shape = self.initialize_head(shape_attributes)
         self.body = self.Body(shape_attributes)
 
+    def initialize_head(self, shape_attributes):
+        START_POINT_X = IN_SQUARES*(BASE_SHIFT_X + .5)
+        START_POINT_Y = IN_SQUARES*(BASE_SHIFT_Y + .5)
+        
+        start_in_middle_of_base = (GLOBAL_NUM_COLS / 2) - 1
+        x = START_POINT_X + start_in_middle_of_base*IN_SQUARES
+        y = START_POINT_Y
+        
+        return self.Circle(x,y)
+        
     def draw_me(self, canvas):
         self.circle_shape.draw_me(canvas)
         self.body.draw_me(canvas)
