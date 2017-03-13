@@ -18,6 +18,13 @@ DEFAULT_SQUARE_DRAW_ATTRIBUTES = {
     "fill_color": 'Orange'
 }
 
+# For color: http://www.codeskulptor.org/docs.html#Colors
+DEFUALT_SNAKE_DRAW_ATTRIBUTES = {
+    "line_width": 2,
+    "line_color": "Aqua",
+    "fill_color": "Pink"
+}
+
 def rect_coords (length, height, startpos = (0, 0)) :
     x = startpos[0]
     y = startpos[1]
@@ -138,19 +145,15 @@ class Character:
         self.circle_shape.center_point = new_point
         
     def move_right(self):
-        print "move right"
         self.update_direction((1,0))
 
     def move_left(self):
-        print "move left"
         self.update_direction((-1,0))
 
     def move_up(self):
-        print "move up"
         self.update_direction((0,-1))
     
     def move_down(self):
-        print "move down"
         self.update_direction((0,1))
     
     def move (self, key):
@@ -169,15 +172,8 @@ class Character:
                 
             if key == Character.key_map["down"]:
                 self.move_down()
-
-# For color: http://www.codeskulptor.org/docs.html#Colors
-snake_draw_attributes = {
-    "line_width": 2,
-    "line_color": "Aqua",
-    "fill_color": "Pink"
-}
                 
-snake = Character(snake_draw_attributes)            
+snake = Character(DEFUALT_SNAKE_DRAW_ATTRIBUTES)            
 grid = SquareGrid()                
 
 
