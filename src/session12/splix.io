@@ -70,17 +70,6 @@ class ShapeAttributes:
 
         # For color: http://www.codeskulptor.org/docs.html#Colors
 
-class Body:
-
-    def __init__(self):
-        self.body_segments = []
-
-    def append(self, segment):
-        self.body_segments.append(segment)
-
-    def list_segments(self):
-        return list(self.body_segments)
-
 class Character:
     
     class Circle:
@@ -95,7 +84,18 @@ class Character:
             y = self.START_POINT_Y
 
             self.radius = self.RADIUS
-            self.center_point = (x,y)  
+            self.center_point = (x,y)
+            
+    class Body:
+
+        def __init__(self):
+            self.body_segments = []
+
+        def append(self, segment):
+            self.body_segments.append(segment)
+
+        def list_segments(self):
+            return list(self.body_segments)
             
     key_map = {
         "left": 37,
@@ -110,7 +110,7 @@ class Character:
     def __init__ (self):
         self.circle_shape = self.Circle()
         self.shape_attributes = ShapeAttributes()
-        self.body = Body()
+        self.body = self.Body()
 
     def bumps_into_left_wall(self):
         return self.circle_shape.center_point[0] <= self.circle_shape.radius
