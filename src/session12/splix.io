@@ -36,7 +36,10 @@ def rect_coords (length, height, startpos = (0, 0)) :
     ]
 
 class Square:
-    def __init__(self, x, y, shape_attributes=DEFAULT_SQUARE_DRAW_ATTRIBUTES, size=GLOBAL_DEFAULT_SQUARE_SIZE):
+    SHAPE_ATTRIBUTES = DEFAULT_SQUARE_DRAW_ATTRIBUTES
+    SIZE = GLOBAL_DEFAULT_SQUARE_SIZE
+    
+    def __init__(self, x, y, size=SIZE, shape_attributes=SHAPE_ATTRIBUTES):
         self.x = x
         self.y = y
         self.shape_attributes = shape_attributes
