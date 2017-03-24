@@ -45,3 +45,9 @@
 > Snake on the grid.
 
 * [Session 11](session11)
+
+## Session 12
+> Final Round.
+
+* [Session 12](session12)
+
